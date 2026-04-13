@@ -40,6 +40,7 @@ pnpm env:decrypt
 
 The repo keeps `.env` encrypted with `dotenvx`, while `.env.keys` stays local-only.
 If you already have the shared `.env.keys`, place it locally and use `pnpm env:decrypt` when you need to edit `.env`.
+The repo-specific restore and update notes live in [docs/env-keys.md](docs/env-keys.md).
 After editing, run `pnpm env:encrypt` again before you finish.
 
 ## Scripts
@@ -82,6 +83,9 @@ Committed:
 Local-only:
 
 - `.env.keys`
+
+The matching 1Password document for this repo is `.env.keys | apps-site` in the `Dotfiles Automation` vault.
+It is separate from `.env.keys | dotfiles`.
 
 Current variables are intentionally minimal:
 
