@@ -1,0 +1,14 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "apps-site",
+  "compatibility_date": "2026-04-13",
+  "routes": [
+    {
+      "pattern": "apps.jey3dayo.net",
+      "custom_domain": true
+    }
+  ],
+  "assets": {
+    "directory": "./dist"
+  }
+}

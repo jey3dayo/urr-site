@@ -1,0 +1,29 @@
+{
+  "name": "apps-site",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": "24.14.1",
+    "pnpm": "10.33.0"
+  },
+  "scripts": {
+    "dev": "dotenvx run --overload -f .env -- astro dev",
+    "build": "dotenvx run --overload -f .env -- astro build",
+    "preview": "pnpm run build && dotenvx run --overload -f .env -- astro preview --host",
+    "cf:dev": "pnpm run build && dotenvx run --overload -f .env -- wrangler dev",
+    "cf:deploy": "dotenvx run --overload -f .env -- wrangler deploy",
+    "cf:deploy:dry-run": "dotenvx run --overload -f .env -- wrangler deploy --dry-run",
+    "deploy": "pnpm run build && pnpm run cf:deploy",
+    "check": "pnpm run build && pnpm run cf:deploy:dry-run",
+    "env:encrypt": "dotenvx encrypt",
+    "env:decrypt": "dotenvx decrypt",
+    "env:run": "dotenvx run --overload -f .env --"
+  },
+  "devDependencies": {
+    "@dotenvx/dotenvx": "^1.61.0",
+    "astro": "^6.1.5",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.81.1"
+  }
+}

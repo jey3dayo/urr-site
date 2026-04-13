@@ -1,0 +1,80 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AppPageLinks from "../components/AppPageLinks.astro";
+
+const siteOrigin = import.meta.env.PUBLIC_SITE_ORIGIN ?? "https://apps.jey3dayo.net";
+---
+
+<BaseLayout
+  title="apps.jey3dayo.net"
+  description="Public support and product pages for apps.jey3dayo.net."
+  currentPath="/"
+>
+  <section class="hero">
+    <div class="eyebrow">Static-first Astro foundation</div>
+    <div class="hero-copy">
+      <h1>One lightweight host for every public app page.</h1>
+      <p>
+        This repository is tuned for support, download, and privacy pages that sit under
+        <strong> path-based routes </strong>
+        on a single Cloudflare-hosted domain.
+      </p>
+      <div class="cta-row">
+        <a class="button button-primary" href="/ultra-rss-reader/support">Open first support page</a>
+        <a class="button button-secondary" href={siteOrigin}>{siteOrigin}</a>
+      </div>
+    </div>
+    <div class="route-preview" aria-label="Route preview">
+      <span class="route-chip">/ultra-rss-reader/</span>
+      <span class="route-chip">/ultra-rss-reader/support</span>
+      <span class="route-chip">/ultra-rss-reader/download</span>
+      <span class="route-chip">/ultra-rss-reader/privacy</span>
+    </div>
+  </section>
+
+  <section class="grid two">
+    <div class="card">
+      <div class="section-heading">
+        <h2>Why this shape</h2>
+        <p>Astro ships plain HTML by default, which keeps these public pages simple, fast, and easy to maintain.</p>
+      </div>
+      <ul class="card-list">
+        <li>
+          <span class="mini-label">Hosting</span>
+          <p>Static output is served from Cloudflare Workers Static Assets via Wrangler.</p>
+        </li>
+        <li>
+          <span class="mini-label">Operations</span>
+          <p>`dotenvx run` wraps local and deploy commands so env handling feels consistent with keep-on.</p>
+        </li>
+        <li>
+          <span class="mini-label">Growth path</span>
+          <p>New apps only need a new `src/pages/&lt;app-slug&gt;/...` directory and matching content.</p>
+        </li>
+      </ul>
+    </div>
+
+    <AppPageLinks
+      items={[
+        {
+          href: "/ultra-rss-reader/",
+          label: "Ultra RSS Reader",
+          note: "First app namespace with a small landing page and live support URL."
+        },
+        {
+          href: "/ultra-rss-reader/support",
+          label: "Support",
+          note: "Store-facing support page with email-first guidance."
+        },
+        {
+          label: "Download",
+          note: "Reserved for a future /ultra-rss-reader/download route."
+        },
+        {
+          label: "Privacy",
+          note: "Reserved for a future /ultra-rss-reader/privacy route."
+        }
+      ]}
+    />
+  </section>
+</BaseLayout>

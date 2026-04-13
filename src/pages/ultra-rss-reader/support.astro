@@ -1,0 +1,70 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const supportEmail = import.meta.env.PUBLIC_SUPPORT_EMAIL ?? "support@jey3dayo.net";
+---
+
+<BaseLayout
+  title="Ultra RSS Reader Support"
+  description="Support page for Ultra RSS Reader."
+  currentPath="/ultra-rss-reader/support"
+>
+  <section class="hero">
+    <div class="eyebrow">Support</div>
+    <div class="hero-copy">
+      <h1>Need help with Ultra RSS Reader?</h1>
+      <p>
+        Email is the main support channel. If something went wrong or the app is not behaving as expected, send a
+        note and we will take it from there.
+      </p>
+      <div class="cta-row">
+        <a class="button button-primary" href={`mailto:${supportEmail}`}>{supportEmail}</a>
+        <a class="button button-secondary" href="/ultra-rss-reader/">Back to app page</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid two">
+    <div class="card">
+      <div class="section-heading">
+        <h2>What to include</h2>
+        <p>A little context helps us get to the useful part faster.</p>
+      </div>
+      <ul class="card-list">
+        <li>
+          <span class="mini-label">App details</span>
+          <p>App version, device model, and operating system version.</p>
+        </li>
+        <li>
+          <span class="mini-label">What happened</span>
+          <p>What you expected, what actually happened, and whether the issue is repeatable.</p>
+        </li>
+        <li>
+          <span class="mini-label">Helpful attachments</span>
+          <p>Screenshots, screen recordings, or logs if they are easy to share.</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="section-heading">
+        <h2>Try this first</h2>
+        <p>These lightweight checks solve the common issues without sending you through a long support flow.</p>
+      </div>
+      <ul class="card-list">
+        <li>
+          <span class="mini-label">Refresh app state</span>
+          <p>Close and reopen the app, then retry the action once.</p>
+        </li>
+        <li>
+          <span class="mini-label">Verify the feed source</span>
+          <p>Make sure the feed URL still loads and that your network connection is stable.</p>
+        </li>
+        <li>
+          <span class="mini-label">Keep the report simple</span>
+          <p>If you are unsure what matters, send a short description first. We can ask for more detail if needed.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

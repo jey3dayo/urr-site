@@ -1,0 +1,30 @@
+---
+interface LinkItem {
+  href?: string;
+  label: string;
+  note: string;
+}
+
+interface Props {
+  items: LinkItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="card">
+  <div class="section-heading">
+    <h2>Page map</h2>
+    <p>Each app lives under its own path, so support, downloads, and privacy pages can grow without changing the host model.</p>
+  </div>
+  <ul class="card-list">
+    {items.map((item) => (
+      <li>
+        <span class="mini-label">{item.label}</span>
+        {item.href ? <a class="route-chip" href={item.href}>{item.href}</a> : <span class="route-chip">{item.note}</span>}
+        {item.href && <p>{item.note}</p>}
+        {!item.href && <p>{item.note}</p>}
+      </li>
+    ))}
+  </ul>
+</div>

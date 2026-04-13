@@ -1,0 +1,46 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  currentPath?: string;
+}
+
+const { title, description, currentPath = "/" } = Astro.props;
+const canonical = Astro.site ? new URL(currentPath, Astro.site).toString() : undefined;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <a class="brand" href="/">
+          <span class="brand-mark">J</span>
+          <span>apps.jey3dayo.net</span>
+        </a>
+        <nav class="topbar-nav" aria-label="Primary">
+          <a class="pill" href="/">Home</a>
+          <a class="pill" href="/ultra-rss-reader/">Ultra RSS Reader</a>
+          <a class="pill" href="/ultra-rss-reader/support" data-active={currentPath === "/ultra-rss-reader/support"}>
+            Support
+          </a>
+        </nav>
+      </header>
+      <main class="page">
+        <slot />
+      </main>
+      <footer class="footer">
+        Public app pages for support, downloads, and privacy information.
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AppPageLinks from "../../components/AppPageLinks.astro";
+
+const supportEmail = import.meta.env.PUBLIC_SUPPORT_EMAIL ?? "support@jey3dayo.net";
+---
+
+<BaseLayout
+  title="Ultra RSS Reader | apps.jey3dayo.net"
+  description="Public pages for Ultra RSS Reader."
+  currentPath="/ultra-rss-reader/"
+>
+  <section class="hero">
+    <div class="eyebrow">Ultra RSS Reader</div>
+    <div class="hero-copy">
+      <h1>Public pages for the first app on the host.</h1>
+      <p>
+        This landing route is intentionally small. It gives the product a stable namespace today, while leaving
+        room for download and privacy pages later.
+      </p>
+      <div class="cta-row">
+        <a class="button button-primary" href="/ultra-rss-reader/support">Support</a>
+        <a class="button button-secondary" href={`mailto:${supportEmail}`}>{supportEmail}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid two">
+    <div class="card">
+      <div class="section-heading">
+        <h2>What exists now</h2>
+        <p>The support route is ready immediately so the app has a stable public URL for store metadata.</p>
+      </div>
+      <ul class="card-list">
+        <li>
+          <span class="mini-label">Live path</span>
+          <p>`/ultra-rss-reader/support` is already part of the scaffold.</p>
+        </li>
+        <li>
+          <span class="mini-label">Shared host</span>
+          <p>The app stays on `apps.jey3dayo.net`, which keeps all product pages under one Cloudflare Worker.</p>
+        </li>
+      </ul>
+    </div>
+
+    <AppPageLinks
+      items={[
+        {
+          href: "/ultra-rss-reader/support",
+          label: "Support",
+          note: "Email-first support guidance for users."
+        },
+        {
+          label: "Download",
+          note: "Add `src/pages/ultra-rss-reader/download.astro` when the download page is ready."
+        },
+        {
+          label: "Privacy",
+          note: "Add `src/pages/ultra-rss-reader/privacy.astro` when the privacy policy is ready."
+        }
+      ]}
+    />
+  </section>
+</BaseLayout>
