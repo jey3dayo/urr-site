@@ -58,6 +58,7 @@ run = "pnpm run build"
 
 [tasks."deploy:dry-run"]
 description = "Cloudflare Workersへのデプロイ内容を確認"
+wait_for = ["build:ci"]
 run = "pnpm run cf:deploy:dry-run"
 
 # ========================================
