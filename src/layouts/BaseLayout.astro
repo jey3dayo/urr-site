@@ -5,14 +5,15 @@ interface Props {
   title: string;
   description: string;
   currentPath?: string;
+  lang?: string;
 }
 
-const { title, description, currentPath = "/" } = Astro.props;
+const { title, description, currentPath = "/", lang = "en" } = Astro.props;
 const canonical = Astro.site ? new URL(currentPath, Astro.site).toString() : undefined;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -32,6 +33,12 @@ const canonical = Astro.site ? new URL(currentPath, Astro.site).toString() : und
           <a class="pill" href="/ultra-rss-reader/">Ultra RSS Reader</a>
           <a class="pill" href="/ultra-rss-reader/support" data-active={currentPath === "/ultra-rss-reader/support"}>
             Support
+          </a>
+          <a class="pill" href="/ultra-rss-reader/download" data-active={currentPath === "/ultra-rss-reader/download"}>
+            Download
+          </a>
+          <a class="pill" href="/ultra-rss-reader/privacy" data-active={currentPath === "/ultra-rss-reader/privacy"}>
+            Privacy
           </a>
         </nav>
       </header>

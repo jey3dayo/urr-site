@@ -1,27 +1,28 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import AppPageLinks from "../components/AppPageLinks.astro";
-
-const siteOrigin = import.meta.env.PUBLIC_SITE_ORIGIN ?? "https://apps.jey3dayo.net";
 ---
 
 <BaseLayout
   title="apps.jey3dayo.net"
   description="Public support and product pages for apps.jey3dayo.net."
   currentPath="/"
+  lang="ja"
 >
   <section class="hero">
-    <div class="eyebrow">Static-first Astro foundation</div>
+    <div class="eyebrow">Public App Pages</div>
     <div class="hero-copy">
-      <h1>One lightweight host for every public app page.</h1>
+      <h1>公開アプリページの一覧</h1>
       <p>
-        This repository is tuned for support, download, and privacy pages that sit under
-        <strong> path-based routes </strong>
-        on a single Cloudflare-hosted domain.
+        apps.jey3dayo.net では、各アプリの support、download、privacy などの公開ページを
+        アプリごとの path-based route でまとめて案内します。
+      </p>
+      <p class="translation">
+        apps.jey3dayo.net groups public support, download, and privacy pages for each app under path-based routes.
       </p>
       <div class="cta-row">
-        <a class="button button-primary" href="/ultra-rss-reader/support">Open first support page</a>
-        <a class="button button-secondary" href={siteOrigin}>{siteOrigin}</a>
+        <a class="button button-primary" href="/ultra-rss-reader/">Ultra RSS Reader</a>
+        <a class="button button-secondary" href="/ultra-rss-reader/support">Support</a>
       </div>
     </div>
     <div class="route-preview" aria-label="Route preview">
@@ -35,21 +36,22 @@ const siteOrigin = import.meta.env.PUBLIC_SITE_ORIGIN ?? "https://apps.jey3dayo.
   <section class="grid two">
     <div class="card">
       <div class="section-heading">
-        <h2>Why this shape</h2>
-        <p>Astro ships plain HTML by default, which keeps these public pages simple, fast, and easy to maintain.</p>
+        <h2>このサイトの役割</h2>
+        <p>まずは公開ページとして必要な導線を、小さく分かりやすく保つことを優先しています。</p>
+        <p class="translation">The goal is to keep public app pages small, clear, and easy to maintain.</p>
       </div>
       <ul class="card-list">
         <li>
-          <span class="mini-label">Hosting</span>
-          <p>Static output is served from Cloudflare Workers Static Assets via Wrangler.</p>
+          <span class="mini-label">公開導線</span>
+          <p>アプリごとに landing、support、download、privacy を分けて追加できる構成です。</p>
         </li>
         <li>
-          <span class="mini-label">Operations</span>
-          <p>`dotenvx run` wraps local and deploy commands so env handling feels consistent with keep-on.</p>
+          <span class="mini-label">現在の対象</span>
+          <p>Ultra RSS Reader の公開ページ群が最初の実装対象です。</p>
         </li>
         <li>
-          <span class="mini-label">Growth path</span>
-          <p>New apps only need a new `src/pages/&lt;app-slug&gt;/...` directory and matching content.</p>
+          <span class="mini-label">運用方針</span>
+          <p>固定文言で断定しにくい情報は、support や download から一次確認先へ誘導します。</p>
         </li>
       </ul>
     </div>
@@ -67,14 +69,23 @@ const siteOrigin = import.meta.env.PUBLIC_SITE_ORIGIN ?? "https://apps.jey3dayo.
           note: "Store-facing support page with email-first guidance."
         },
         {
+          href: "/ultra-rss-reader/download",
           label: "Download",
-          note: "Reserved for a future /ultra-rss-reader/download route."
+          note: "Live download guidance page that points users to the current public release source."
         },
         {
+          href: "/ultra-rss-reader/privacy",
           label: "Privacy",
-          note: "Reserved for a future /ultra-rss-reader/privacy route."
+          note: "Live privacy summary page for Ultra RSS Reader."
         }
       ]}
     />
   </section>
 </BaseLayout>
+
+<style>
+  .translation {
+    margin-top: 0.35rem;
+    font-size: 0.96rem;
+  }
+</style>

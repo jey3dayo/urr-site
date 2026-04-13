@@ -3,24 +3,64 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import AppPageLinks from "../../components/AppPageLinks.astro";
 
 const supportEmail = import.meta.env.PUBLIC_SUPPORT_EMAIL ?? "support@jey3dayo.net";
+
+const featureItems = [
+  {
+    label: "対応アカウント",
+    body: "Local RSS/Atom feeds と FreshRSS を扱えます。",
+    bodyEn: "Supports Local RSS/Atom feeds and FreshRSS.",
+  },
+  {
+    label: "読むための UI",
+    body: "Sidebar、article list、article view の 3 ペイン構成をベースにしています。",
+    bodyEn: "Built around a three-pane UI with sidebar, article list, and article view.",
+  },
+  {
+    label: "整理と検索",
+    body: "全文検索、フォルダ階層、ショートカット、OPML export を備えています。",
+    bodyEn: "Includes full-text search, folder hierarchy, keyboard shortcuts, and OPML export.",
+  },
+];
+
+const supportItems = [
+  {
+    label: "サポート窓口",
+    body: "問い合わせは email-first です。困ったときは support page から連絡できます。",
+    bodyEn: "Support is email-first, and the support page is the main public contact route.",
+  },
+  {
+    label: "トラブルシュート",
+    body: "support page では、バージョン、OS、利用中アカウント、ログ確認の案内をまとめています。",
+    bodyEn: "The support page explains what to send, including app version, OS, account type, and logs.",
+  },
+  {
+    label: "プライバシー要点",
+    body: "認証情報は OS keyring に保存され、privacy の要点は support page と privacy page から確認できます。",
+    bodyEn: "Credentials are stored in the OS keyring, and key privacy notes are available from the support and privacy pages.",
+  },
+];
 ---
 
 <BaseLayout
   title="Ultra RSS Reader | apps.jey3dayo.net"
-  description="Public pages for Ultra RSS Reader."
+  description="Ultra RSS Reader の公開ページ。support・download・privacy 導線の入口。"
   currentPath="/ultra-rss-reader/"
+  lang="ja"
 >
   <section class="hero">
     <div class="eyebrow">Ultra RSS Reader</div>
     <div class="hero-copy">
-      <h1>Public pages for the first app on the host.</h1>
+      <h1>Desktop-first RSS reader の公開ページ</h1>
       <p>
-        This landing route is intentionally small. It gives the product a stable namespace today, while leaving
-        room for download and privacy pages later.
+        Ultra RSS Reader は、Local RSS/Atom feeds と FreshRSS に対応した desktop-first RSS reader です。
+        ここでは公開向けの support、download、privacy 導線をまとめて案内します。
+      </p>
+      <p class="translation">
+        Ultra RSS Reader is a desktop-first RSS reader with public support, download, and privacy pages.
       </p>
       <div class="cta-row">
         <a class="button button-primary" href="/ultra-rss-reader/support">Support</a>
-        <a class="button button-secondary" href={`mailto:${supportEmail}`}>{supportEmail}</a>
+        <a class="button button-secondary" href="/ultra-rss-reader/download">Download</a>
       </div>
     </div>
   </section>
@@ -28,37 +68,85 @@ const supportEmail = import.meta.env.PUBLIC_SUPPORT_EMAIL ?? "support@jey3dayo.n
   <section class="grid two">
     <div class="card">
       <div class="section-heading">
-        <h2>What exists now</h2>
-        <p>The support route is ready immediately so the app has a stable public URL for store metadata.</p>
+        <h2>アプリ概要</h2>
+        <p>README から確定できる範囲で、公開 landing に載せてよい要点だけを絞っています。</p>
+        <p class="translation">Only source-backed product facts are listed here.</p>
       </div>
       <ul class="card-list">
-        <li>
-          <span class="mini-label">Live path</span>
-          <p>`/ultra-rss-reader/support` is already part of the scaffold.</p>
-        </li>
-        <li>
-          <span class="mini-label">Shared host</span>
-          <p>The app stays on `apps.jey3dayo.net`, which keeps all product pages under one Cloudflare Worker.</p>
-        </li>
+        {featureItems.map((item) => (
+          <li>
+            <span class="mini-label">{item.label}</span>
+            <p>{item.body}</p>
+            <p class="translation">{item.bodyEn}</p>
+          </li>
+        ))}
       </ul>
     </div>
 
+    <div class="card">
+      <div class="section-heading">
+        <h2>まず使うページ</h2>
+        <p>現時点では support page が最も実用的な公開導線です。</p>
+        <p class="translation">Right now, the support page is the main public destination.</p>
+      </div>
+      <ul class="card-list">
+        {supportItems.map((item) => (
+          <li>
+            <span class="mini-label">{item.label}</span>
+            <p>{item.body}</p>
+            <p class="translation">{item.bodyEn}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="grid two">
     <AppPageLinks
       items={[
         {
           href: "/ultra-rss-reader/support",
           label: "Support",
-          note: "Email-first support guidance for users."
+          note: "問い合わせ窓口、FAQ、privacy 要点、ログ案内をまとめた公開ページです。"
         },
         {
+          href: "/ultra-rss-reader/download",
           label: "Download",
-          note: "Add `src/pages/ultra-rss-reader/download.astro` when the download page is ready."
+          note: "公開 download 導線の案内ページです。最新版の availability は GitHub Releases 基準で確認します。"
         },
         {
+          href: "/ultra-rss-reader/privacy",
           label: "Privacy",
-          note: "Add `src/pages/ultra-rss-reader/privacy.astro` when the privacy policy is ready."
+          note: "現在の privacy policy の要点をまとめた公開ページです。"
         }
       ]}
     />
+
+    <div class="card">
+      <div class="section-heading">
+        <h2>公開情報の扱い</h2>
+        <p>この landing では、support page と同様に公開済み情報だけを使っています。</p>
+        <p class="translation">This landing page intentionally avoids unpublished or inferred details.</p>
+      </div>
+      <ul class="card-list">
+        <li>
+          <span class="mini-label">確定済み</span>
+          <p>アプリ概要、対応アカウント、support 窓口、download 導線、privacy の要点。</p>
+          <p class="translation">Confirmed: app overview, supported account types, support channel, download route, and privacy highlights.</p>
+        </li>
+        <li>
+          <span class="mini-label">運用上の注意</span>
+          <p>最新版の公開 availability は固定文言ではなく GitHub Releases 側で確認する前提です。</p>
+          <p class="translation">Current public availability should be checked on GitHub Releases instead of relying on fixed copy here.</p>
+        </li>
+      </ul>
+    </div>
   </section>
 </BaseLayout>
+
+<style>
+  .translation {
+    margin-top: 0.35rem;
+    font-size: 0.96rem;
+  }
+</style>

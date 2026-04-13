@@ -1,0 +1,216 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AppPageLinks from "../../components/AppPageLinks.astro";
+
+const supportEmail = import.meta.env.PUBLIC_SUPPORT_EMAIL ?? "support@jey3dayo.net";
+
+const storageItems = [
+  {
+    label: "認証情報",
+    body: "FreshRSS の password / token は SQLite ではなく OS keyring に保存されます。",
+    bodyEn: "FreshRSS passwords and tokens are stored in the OS keyring, not in SQLite.",
+  },
+  {
+    label: "ローカルデータ",
+    body: "フィードデータや記事データなど、アプリが扱うデータは SQLite ベースで保持されます。",
+    bodyEn: "App data such as feed and article data is stored through an embedded SQLite database.",
+  },
+  {
+    label: "記事本文",
+    body: "Reader 表示では Rust 側で sanitization 済みの HTML を利用します。",
+    bodyEn: "Reader mode uses HTML that has already been sanitized on the Rust side.",
+  },
+];
+
+const networkItems = [
+  {
+    label: "Reader mode",
+    body: "sanitized article を開いても、publisher 管理下の remote images を読み込む場合があります。",
+    bodyEn: "Even in Reader mode, opening a sanitized article may still load remote images from publisher-controlled hosts.",
+  },
+  {
+    label: "Web Preview",
+    body: "Web Preview は embedded browser として扱われ、publisher のページを開く操作に近い前提です。",
+    bodyEn: "Web Preview should be treated like visiting the publisher page in an embedded browser.",
+  },
+  {
+    label: "通信上の露出",
+    body: "remote media request により、IP address、user agent、timing などが第三者ホストに見える可能性があります。",
+    bodyEn: "Remote media requests may expose your IP address, user agent, and timing information to third-party hosts.",
+  },
+];
+
+const policyItems = [
+  {
+    label: "現在の方針",
+    body: "Ultra RSS Reader は現時点で compatibility-first の feed content policy を採っています。",
+    bodyEn: "Ultra RSS Reader currently follows a compatibility-first policy for feed content.",
+  },
+  {
+    label: "守っていること",
+    body: "app scripts は `'self'` のまま維持し、Reader の HTML は sanitized content を前提にしています。",
+    bodyEn: "App scripts remain locked to `'self'`, and Reader HTML continues to come from sanitized content.",
+  },
+  {
+    label: "約束していないこと",
+    body: "記事を開いても third-party request が一切発生しない、という保証は現在の挙動ではしていません。",
+    bodyEn: "The app does not currently promise that opening an article avoids all third-party requests.",
+  },
+];
+
+const futureItems = [
+  {
+    label: "一括遮断はしない",
+    body: "remote images や frames を即座に全面遮断すると、readability や preview compatibility を大きく損なう可能性があります。",
+    bodyEn: "The project is intentionally avoiding an immediate blanket block on remote images and frames.",
+  },
+  {
+    label: "段階的な強化",
+    body: "privacy hardening は incremental に進める方針で、Reader と Web Preview を同じスイッチで扱わない方向が示されています。",
+    bodyEn: "Future privacy hardening is expected to be incremental, with Reader mode and Web Preview handled separately.",
+  },
+  {
+    label: "変更前の確認",
+    body: "privacy policy を厳しくする変更は、Reader mode、preview mode、packaged builds での検証が前提です。",
+    bodyEn: "Any tighter privacy behavior should be verified in Reader mode, preview mode, and packaged builds first.",
+  },
+];
+---
+
+<BaseLayout
+  title="Ultra RSS Reader Privacy | apps.jey3dayo.net"
+  description="Ultra RSS Reader のプライバシー方針の要点。"
+  currentPath="/ultra-rss-reader/privacy"
+  lang="ja"
+>
+  <section class="hero">
+    <div class="eyebrow">Privacy</div>
+    <div class="hero-copy">
+      <h1>Ultra RSS Reader の privacy 概要</h1>
+      <p>
+        このページは、Ultra RSS Reader の公開ソースにある privacy / feed content policy の要点を、
+        利用者向けに簡潔にまとめたものです。
+      </p>
+      <p class="translation">
+        This page summarizes the current privacy and feed content policy based on the public source of Ultra RSS Reader.
+      </p>
+      <div class="cta-row">
+        <a class="button button-primary" href="/ultra-rss-reader/support">Support</a>
+        <a class="button button-secondary" href={`mailto:${supportEmail}`}>{supportEmail}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid two">
+    <div class="card">
+      <div class="section-heading">
+        <h2>保存されるデータ</h2>
+        <p>現在の公開情報から確認できる保存先と扱いをまとめています。</p>
+        <p class="translation">These are the storage behaviors that can be confirmed from the current public source.</p>
+      </div>
+      <ul class="card-list">
+        {storageItems.map((item) => (
+          <li>
+            <span class="mini-label">{item.label}</span>
+            <p>{item.body}</p>
+            <p class="translation">{item.bodyEn}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="section-heading">
+        <h2>通信について</h2>
+        <p>Reader mode と Web Preview の挙動は privacy 上まったく同じではありません。</p>
+        <p class="translation">Reader mode and Web Preview do not have identical privacy behavior.</p>
+      </div>
+      <ul class="card-list">
+        {networkItems.map((item) => (
+          <li>
+            <span class="mini-label">{item.label}</span>
+            <p>{item.body}</p>
+            <p class="translation">{item.bodyEn}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="grid two">
+    <div class="card">
+      <div class="section-heading">
+        <h2>現在の policy</h2>
+        <p>利用前に知っておいてほしい、現在の前提を明示します。</p>
+        <p class="translation">These are the current privacy assumptions users should know today.</p>
+      </div>
+      <ul class="card-list">
+        {policyItems.map((item) => (
+          <li>
+            <span class="mini-label">{item.label}</span>
+            <p>{item.body}</p>
+            <p class="translation">{item.bodyEn}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="section-heading">
+        <h2>今後の方向性</h2>
+        <p>privacy を強化する場合も、互換性を見ながら段階的に進める方針です。</p>
+        <p class="translation">Future privacy changes are expected to be introduced gradually with compatibility in mind.</p>
+      </div>
+      <ul class="card-list">
+        {futureItems.map((item) => (
+          <li>
+            <span class="mini-label">{item.label}</span>
+            <p>{item.body}</p>
+            <p class="translation">{item.bodyEn}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="grid two">
+    <AppPageLinks
+      items={[
+        {
+          href: "/ultra-rss-reader/support",
+          label: "Support",
+          note: "問い合わせ窓口、FAQ、トラブルシュート案内。"
+        },
+        {
+          href: "/ultra-rss-reader/download",
+          label: "Download",
+          note: "公開 download 導線の案内ページです。最新版の availability は GitHub Releases 基準で確認します。"
+        },
+        {
+          href: "/ultra-rss-reader/privacy",
+          label: "Privacy",
+          note: "このページ。現在の privacy policy の要点をまとめています。"
+        }
+      ]}
+    />
+
+    <div class="card">
+      <div class="section-heading">
+        <h2>問い合わせ先</h2>
+        <p>privacy に関する個別の質問や懸念があれば、support 窓口からご連絡ください。</p>
+        <p class="translation">If you have privacy-specific questions or concerns, please contact support.</p>
+      </div>
+      <div class="cta-row">
+        <a class="button button-primary" href={`mailto:${supportEmail}`}>{supportEmail}</a>
+        <a class="button button-secondary" href="/ultra-rss-reader/support">Support page</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .translation {
+    margin-top: 0.35rem;
+    font-size: 0.96rem;
+  }
+</style>

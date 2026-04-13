@@ -1,25 +1,167 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import AppPageLinks from "../../components/AppPageLinks.astro";
 
 const supportEmail = import.meta.env.PUBLIC_SUPPORT_EMAIL ?? "support@jey3dayo.net";
+
+const overviewItems = [
+  {
+    label: "対応アカウント",
+    body: "Local RSS/Atom feeds と FreshRSS をサポートしています。",
+    bodyEn: "Supports Local RSS/Atom feeds and FreshRSS.",
+  },
+  {
+    label: "よくある相談",
+    body: "同期、フィード追加、Web Preview、ログ確認まわりの問い合わせを想定しています。",
+    bodyEn: "Common topics include sync issues, adding feeds, Web Preview, and troubleshooting with logs.",
+  },
+  {
+    label: "英語対応",
+    body: "日本語中心ですが、English inquiries are also welcome.",
+    bodyEn: "Japanese is the primary language here, but English inquiries are welcome too.",
+  },
+];
+
+const contactItems = [
+  {
+    label: "アプリ情報",
+    body: "アプリのバージョン、OS、入手元が分かると切り分けが早くなります。",
+    bodyEn: "Please include the app version, OS, and where you got the app if possible.",
+  },
+  {
+    label: "利用中の設定",
+    body: "Local feeds か FreshRSS か、どのアカウントで起きたかを書いてください。",
+    bodyEn: "Tell us whether the issue happened with Local feeds or FreshRSS, and which account was affected.",
+  },
+  {
+    label: "症状の説明",
+    body: "何をしようとして、何が起きたか、再現するかどうかを教えてください。",
+    bodyEn: "Explain what you tried to do, what happened, and whether it is reproducible.",
+  },
+  {
+    label: "添付すると助かるもの",
+    body: "スクリーンショット、表示されたメッセージ、共有しやすい範囲のログがあると助かります。",
+    bodyEn: "Screenshots, visible error messages, and shareable logs are especially helpful.",
+  },
+];
+
+const quickChecks = [
+  {
+    label: "FreshRSS 接続",
+    body: "Server URL、ユーザー名、FreshRSS 側の API password を確認してください。",
+    bodyEn: "Check the server URL, username, and the FreshRSS API password first.",
+  },
+  {
+    label: "フィード追加",
+    body: "Feed URL または Site URL が `http(s)` の完全な URL か、ブラウザで開けるかを確認してください。",
+    bodyEn: "Make sure the feed URL or site URL is a full `http(s)` URL and opens in a browser.",
+  },
+  {
+    label: "Web Preview",
+    body: "一部のページはアプリ内表示に対応しません。再試行するか、外部ブラウザで開いて確認してください。",
+    bodyEn: "Some pages cannot be shown in the in-app view. Retry once or open them in your external browser.",
+  },
+  {
+    label: "ログ確認",
+    body: "必要に応じて `Settings > Data Management > Open Log Directory` からログを開いてください。",
+    bodyEn: "If needed, open logs from `Settings > Data Management > Open Log Directory`.",
+  },
+];
+
+const faqItems = [
+  {
+    label: "どんなアプリですか",
+    body: "Ultra RSS Reader は desktop-first の RSS reader で、3 ペイン UI、全文検索、ショートカット、OPML export に対応しています。",
+    bodyEn: "Ultra RSS Reader is a desktop-first RSS reader with a three-pane UI, full-text search, shortcuts, and OPML export.",
+  },
+  {
+    label: "どのアカウント種類をサポートしていますか",
+    body: "公開ソースから確認できる範囲では Local RSS/Atom feeds と FreshRSS がサポート対象です。",
+    bodyEn: "Based on the public source, supported account types are Local RSS/Atom feeds and FreshRSS.",
+  },
+  {
+    label: "購読一覧をバックアップできますか",
+    body: "アカウント設定から OPML を export できます。購読一覧の控えを取りたいときに使えます。",
+    bodyEn: "Yes. You can export OPML from account settings to back up your subscriptions.",
+  },
+  {
+    label: "Web Preview が開けないときは",
+    body: "アプリ内表示に向かないページがあります。エラー時は再試行するか、外部ブラウザ導線を使ってください。",
+    bodyEn: "Some pages are not compatible with Web Preview. Retry or use the external browser route.",
+  },
+];
+
+const privacyItems = [
+  {
+    label: "認証情報",
+    body: "FreshRSS の password / token は SQLite ではなく OS keyring に保存されます。",
+    bodyEn: "FreshRSS passwords and tokens are stored in the OS keyring, not in SQLite.",
+  },
+  {
+    label: "記事本文",
+    body: "Reader 表示の HTML は sanitization 済みの内容を使います。",
+    bodyEn: "Reader mode uses sanitized HTML content.",
+  },
+  {
+    label: "通信上の注意",
+    body: "Reader の remote images や Web Preview は、publisher 側ホストへの通信を発生させる場合があります。",
+    bodyEn: "Remote images in Reader mode and Web Preview may still contact publisher-controlled hosts.",
+  },
+];
+
+const openQuestions = [
+  {
+    label: "公開配布の最新版",
+    body: "公開 download page は用意していますが、最新版の availability は固定文言ではなく GitHub Releases 基準で確認する運用です。",
+    bodyEn: "The public download page is now available, but current release availability is still expected to be checked on GitHub Releases.",
+  },
+  {
+    label: "専用 privacy page",
+    body: "よりまとまった privacy の説明は `/ultra-rss-reader/privacy` で確認できます。",
+    bodyEn: "A more focused privacy summary is now available at `/ultra-rss-reader/privacy`.",
+  },
+  {
+    label: "公開リリース前提の文言",
+    body: "GitHub Releases では `v0.5.0` が Latest で、その後の `v0.6.0` 以降は Draft が並んでいます。機能説明は広めに書きつつ、公開済み導線は断定しすぎない方針にしています。",
+    bodyEn: "On GitHub Releases, `v0.5.0` is the latest non-draft release and later versions are still drafts, so public copy stays intentionally conservative.",
+  },
+];
 ---
 
 <BaseLayout
-  title="Ultra RSS Reader Support"
-  description="Support page for Ultra RSS Reader."
+  title="Ultra RSS Reader Support | apps.jey3dayo.net"
+  description="Ultra RSS Reader のサポート窓口、FAQ、プライバシー案内。"
   currentPath="/ultra-rss-reader/support"
+  lang="ja"
 >
   <section class="hero">
     <div class="eyebrow">Support</div>
     <div class="hero-copy">
-      <h1>Need help with Ultra RSS Reader?</h1>
+      <h1>Ultra RSS Reader のサポート</h1>
       <p>
-        Email is the main support channel. If something went wrong or the app is not behaving as expected, send a
-        note and we will take it from there.
+        Ultra RSS Reader は、Local RSS/Atom feeds と FreshRSS に対応した desktop-first RSS reader です。
+        困ったときはメールでご連絡ください。サポート窓口は email-first で、日本語中心ですが英語でも受け付けます。
+      </p>
+      <p class="translation">
+        Need help with Ultra RSS Reader? Please contact us by email. Japanese is primary, but English is welcome.
       </p>
       <div class="cta-row">
         <a class="button button-primary" href={`mailto:${supportEmail}`}>{supportEmail}</a>
-        <a class="button button-secondary" href="/ultra-rss-reader/">Back to app page</a>
+        <a class="button button-secondary" href="/ultra-rss-reader/">アプリ案内へ戻る</a>
+      </div>
+      <div class="support-meta">
+        <div class="support-meta-item">
+          <span class="mini-label">Primary channel</span>
+          <p>Email support</p>
+        </div>
+        <div class="support-meta-item">
+          <span class="mini-label">Platform</span>
+          <p>Desktop app</p>
+        </div>
+        <div class="support-meta-item">
+          <span class="mini-label">Languages</span>
+          <p>Japanese / English</p>
+        </div>
       </div>
     </div>
   </section>
@@ -27,44 +169,171 @@ const supportEmail = import.meta.env.PUBLIC_SUPPORT_EMAIL ?? "support@jey3dayo.n
   <section class="grid two">
     <div class="card">
       <div class="section-heading">
-        <h2>What to include</h2>
-        <p>A little context helps us get to the useful part faster.</p>
+        <h2>このページで案内すること</h2>
+        <p>公開ソースから確認できた範囲で、support 初版に必要な要点をまとめています。</p>
+        <p class="translation">This page covers the first public support draft based on source-backed information.</p>
       </div>
       <ul class="card-list">
-        <li>
-          <span class="mini-label">App details</span>
-          <p>App version, device model, and operating system version.</p>
-        </li>
-        <li>
-          <span class="mini-label">What happened</span>
-          <p>What you expected, what actually happened, and whether the issue is repeatable.</p>
-        </li>
-        <li>
-          <span class="mini-label">Helpful attachments</span>
-          <p>Screenshots, screen recordings, or logs if they are easy to share.</p>
-        </li>
+        {overviewItems.map((item) => (
+          <li>
+            <span class="mini-label">{item.label}</span>
+            <p>{item.body}</p>
+            <p class="translation">{item.bodyEn}</p>
+          </li>
+        ))}
       </ul>
     </div>
 
     <div class="card">
       <div class="section-heading">
-        <h2>Try this first</h2>
-        <p>These lightweight checks solve the common issues without sending you through a long support flow.</p>
+        <h2>問い合わせ時にあると助かる情報</h2>
+        <p>最初のメールに少し情報があるだけで、往復を減らしやすくなります。</p>
+        <p class="translation">A little context in the first email helps shorten the back-and-forth.</p>
       </div>
       <ul class="card-list">
-        <li>
-          <span class="mini-label">Refresh app state</span>
-          <p>Close and reopen the app, then retry the action once.</p>
-        </li>
-        <li>
-          <span class="mini-label">Verify the feed source</span>
-          <p>Make sure the feed URL still loads and that your network connection is stable.</p>
-        </li>
-        <li>
-          <span class="mini-label">Keep the report simple</span>
-          <p>If you are unsure what matters, send a short description first. We can ask for more detail if needed.</p>
-        </li>
+        {contactItems.map((item) => (
+          <li>
+            <span class="mini-label">{item.label}</span>
+            <p>{item.body}</p>
+            <p class="translation">{item.bodyEn}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="grid two">
+    <div class="card">
+      <div class="section-heading">
+        <h2>まず確認してほしいこと</h2>
+        <p>よくあるパターンは、いくつかの軽い確認で切り分けできます。</p>
+        <p class="translation">These quick checks often help narrow the issue before you contact support.</p>
+      </div>
+      <ul class="card-list">
+        {quickChecks.map((item) => (
+          <li>
+            <span class="mini-label">{item.label}</span>
+            <p>{item.body}</p>
+            <p class="translation">{item.bodyEn}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="section-heading">
+        <h2>FAQ 候補</h2>
+        <p>アプリ repo の README・設定文言・runbook から、公開ページ向けに整理した初稿です。</p>
+        <p class="translation">These FAQ entries are adapted from the app repository, settings copy, and runbook.</p>
+      </div>
+      <ul class="card-list">
+        {faqItems.map((item) => (
+          <li>
+            <span class="mini-label">{item.label}</span>
+            <p>{item.body}</p>
+            <p class="translation">{item.bodyEn}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="section-heading">
+      <h2>プライバシーとデータ</h2>
+      <p>ここでは support に必要な要点だけを案内します。より詳しい要約は privacy page を参照してください。</p>
+      <p class="translation">Only the key privacy and data notes are summarized here. See the privacy page for a more focused summary.</p>
+    </div>
+    <div class="privacy-grid">
+      {privacyItems.map((item) => (
+        <div class="privacy-item">
+          <span class="mini-label">{item.label}</span>
+          <p>{item.body}</p>
+          <p class="translation">{item.bodyEn}</p>
+        </div>
+      ))}
+    </div>
+    <p class="note">
+      privacy に関する個別の質問は、<a href="/ultra-rss-reader/privacy">privacy page</a> を確認したうえで、
+      必要なら <a href={`mailto:${supportEmail}`}>{supportEmail}</a> までご連絡ください。
+    </p>
+  </section>
+
+  <section class="grid two">
+    <AppPageLinks
+      items={[
+        {
+          href: "/ultra-rss-reader/support",
+          label: "Support",
+          note: "このページ。問い合わせ窓口、FAQ、privacy 要点をまとめています。"
+        },
+        {
+          href: "/ultra-rss-reader/download",
+          label: "Download",
+          note: "公開 download 導線の案内ページです。最新版の availability は GitHub Releases 基準で確認します。"
+        },
+        {
+          href: "/ultra-rss-reader/privacy",
+          label: "Privacy",
+          note: "現在の privacy policy の要点をまとめた公開ページです。"
+        }
+      ]}
+    />
+
+    <div class="card">
+      <div class="section-heading">
+        <h2>要確認のこと</h2>
+        <p>推測で埋めないため、この初稿では次の点を明示的に保留しています。</p>
+        <p class="translation">These items are still intentionally left open instead of being guessed.</p>
+      </div>
+      <ul class="card-list">
+        {openQuestions.map((item) => (
+          <li>
+            <span class="mini-label">{item.label}</span>
+            <p>{item.body}</p>
+            <p class="translation">{item.bodyEn}</p>
+          </li>
+        ))}
       </ul>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .support-meta {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  .support-meta-item,
+  .privacy-item {
+    padding: 0.95rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.62);
+  }
+
+  .privacy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .note {
+    margin-top: 1rem;
+  }
+
+  .translation {
+    margin-top: 0.35rem;
+    font-size: 0.96rem;
+  }
+
+  @media (max-width: 760px) {
+    .support-meta,
+    .privacy-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

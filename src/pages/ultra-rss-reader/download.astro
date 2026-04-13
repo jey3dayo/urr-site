@@ -1,0 +1,145 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AppPageLinks from "../../components/AppPageLinks.astro";
+
+const supportEmail = import.meta.env.PUBLIC_SUPPORT_EMAIL ?? "support@jey3dayo.net";
+const releasesUrl = "https://github.com/jey3dayo/ultra-rss-reader/releases";
+
+const availabilityItems = [
+  {
+    label: "公開配布の確認先",
+    body: "現在の公開 build / release status は GitHub Releases を確認してください。",
+    bodyEn: "Please use GitHub Releases to check the current public build and release status.",
+  },
+  {
+    label: "想定プラットフォーム",
+    body: "公開ソースの release フローでは macOS Apple Silicon と Windows 向けの build が想定されています。",
+    bodyEn: "The public release workflow is set up around macOS Apple Silicon and Windows builds.",
+  },
+  {
+    label: "配布状況の変動",
+    body: "download availability は release 状況に応じて変わる可能性があります。このページでは固定文言を置きすぎない方針です。",
+    bodyEn: "Download availability may change with release status, so this page intentionally keeps the copy conservative.",
+  },
+];
+
+const safetyItems = [
+  {
+    label: "最新状況",
+    body: "最新版の公開有無は、このページの静的文面ではなく GitHub Releases 側で確認してください。",
+    bodyEn: "For the latest public availability, rely on GitHub Releases rather than static text on this page.",
+  },
+  {
+    label: "困ったとき",
+    body: "欲しい build が見つからない、あるいは install で詰まる場合は support 窓口へ連絡してください。",
+    bodyEn: "If you cannot find the build you need or run into installation trouble, please contact support.",
+  },
+  {
+    label: "privacy も確認",
+    body: "配布前に privacy や feed content policy の要点を確認したい場合は privacy page を参照してください。",
+    bodyEn: "If you want to review privacy and feed content behavior first, see the privacy page as well.",
+  },
+];
+---
+
+<BaseLayout
+  title="Ultra RSS Reader Download | apps.jey3dayo.net"
+  description="Ultra RSS Reader の公開 download 導線。"
+  currentPath="/ultra-rss-reader/download"
+  lang="ja"
+>
+  <section class="hero">
+    <div class="eyebrow">Download</div>
+    <div class="hero-copy">
+      <h1>Ultra RSS Reader の download 案内</h1>
+      <p>
+        Ultra RSS Reader の公開配布状況は変わりうるため、このページでは固定の配布断定を避け、
+        GitHub Releases を一次確認先として案内します。
+      </p>
+      <p class="translation">
+        Public download availability may change, so this page points to GitHub Releases as the primary place to check.
+      </p>
+      <div class="cta-row">
+        <a class="button button-primary" href={releasesUrl} target="_blank" rel="noreferrer">GitHub Releases</a>
+        <a class="button button-secondary" href="/ultra-rss-reader/support">Support</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid two">
+    <div class="card">
+      <div class="section-heading">
+        <h2>ダウンロード前に知っておくこと</h2>
+        <p>配布導線を公開するうえで、安全に言えることだけをまとめています。</p>
+        <p class="translation">Only source-backed download guidance is included here.</p>
+      </div>
+      <ul class="card-list">
+        {availabilityItems.map((item) => (
+          <li>
+            <span class="mini-label">{item.label}</span>
+            <p>{item.body}</p>
+            <p class="translation">{item.bodyEn}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="section-heading">
+        <h2>確認のポイント</h2>
+        <p>ダウンロード関連で迷いやすい点を先に案内します。</p>
+        <p class="translation">These are the main things to double-check before or after downloading.</p>
+      </div>
+      <ul class="card-list">
+        {safetyItems.map((item) => (
+          <li>
+            <span class="mini-label">{item.label}</span>
+            <p>{item.body}</p>
+            <p class="translation">{item.bodyEn}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="grid two">
+    <AppPageLinks
+      items={[
+        {
+          href: "/ultra-rss-reader/support",
+          label: "Support",
+          note: "問い合わせ窓口、FAQ、トラブルシュート案内。"
+        },
+        {
+          href: "/ultra-rss-reader/download",
+          label: "Download",
+          note: "このページ。公開 download 導線の案内。"
+        },
+        {
+          href: "/ultra-rss-reader/privacy",
+          label: "Privacy",
+          note: "privacy と feed content policy の要点。"
+        }
+      ]}
+    />
+
+    <div class="card">
+      <div class="section-heading">
+        <h2>問い合わせ先</h2>
+        <p>配布物の見つけ方や install で困ったときは support 窓口へ連絡できます。</p>
+        <p class="translation">If you need help finding a build or installing it, contact support.</p>
+      </div>
+      <div class="cta-row">
+        <a class="button button-primary" href={`mailto:${supportEmail}`}>{supportEmail}</a>
+        <a class="button button-secondary" href={releasesUrl} target="_blank" rel="noreferrer">Open Releases</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .translation {
+    margin-top: 0.35rem;
+    font-size: 0.96rem;
+  }
+</style>
