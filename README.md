@@ -50,9 +50,28 @@ After editing, run `pnpm env:encrypt` again before you finish.
 - `pnpm cf:dev` - build first, then preview with Wrangler
 - `pnpm cf:deploy` - deploy to Cloudflare Workers
 - `pnpm cf:deploy:dry-run` - validate the Wrangler deployment bundle without publishing
+- `pnpm lint` - run Biome checks
+- `pnpm format` - apply Biome fixes
 - `pnpm check` - run build plus dry-run deployment validation
 - `pnpm env:encrypt` - encrypt `.env` and generate `.env.keys`
 - `pnpm env:decrypt` - decrypt `.env` for editing
+
+## Formatting and linting
+
+`apps-site` keeps the lightweight shape of the app itself, but it now has the same operational feel as `keep-on` for routine checks:
+
+- `.editorconfig` for baseline file formatting rules
+- `Biome` for code formatting and linting
+- `markdownlint-cli2` for Markdown
+- `yamllint` for `.github/workflows`
+- `mise.toml` tasks for `format`, `lint`, `check:quick`, and `ci`
+
+Useful local commands:
+
+- `mise run format`
+- `mise run lint`
+- `mise run check:quick`
+- `mise run ci`
 
 ## Environment handling
 
@@ -80,7 +99,18 @@ For CI or remote deploys, provide `DOTENV_PRIVATE_KEY` from `.env.keys` and keep
 `wrangler.jsonc` serves the Astro `dist/` directory through Workers Static Assets.
 This is intentionally static-only for now: no Worker entrypoint, no adapter, no database, and no auth layer.
 
-When the domain wiring is ready, add the route or custom domain settings in Cloudflare and keep path-based app pages under the same Worker.
+The repository already deploys to `apps.jey3dayo.net` through a Worker custom domain.
+
+## GitHub Actions secrets
+
+The current workflows expect these repository secrets:
+
+- `DOTENV_PRIVATE_KEY`
+- `CLOUDFLARE_API_TOKEN`
+- `CLOUDFLARE_ACCOUNT_ID`
+
+`checks.yml` uses them to run the same encrypted-env build and Wrangler dry-run checks as local `mise run ci`.
+`deploy.yml` uses the same set to deploy on pushes to `main`.
 
 ## Reference from keep-on
 

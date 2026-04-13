@@ -10,9 +10,10 @@
 
 ---
 
-### Task 1: Establish project metadata and local tooling
+## Task 1: Establish project metadata and local tooling
 
 **Files:**
+
 - Create: `C:\Users\j138c\src\github.com\jey3dayo\apps-site\package.json`
 - Create: `C:\Users\j138c\src\github.com\jey3dayo\apps-site\tsconfig.json`
 - Create: `C:\Users\j138c\src\github.com\jey3dayo\apps-site\.gitignore`
@@ -24,9 +25,10 @@
 - [x] Step 4: Add a small `mise.toml` with pinned `node` and `pnpm`, plus lightweight `check` and `deploy` tasks.
 - [x] Step 5: Run `pnpm install` to generate the lockfile and confirm dependency resolution succeeds.
 
-### Task 2: Add Astro static-site scaffold for app pages
+## Task 2: Add Astro static-site scaffold for app pages
 
 **Files:**
+
 - Create: `C:\Users\j138c\src\github.com\jey3dayo\apps-site\astro.config.mjs`
 - Create: `C:\Users\j138c\src\github.com\jey3dayo\apps-site\src\env.d.ts`
 - Create: `C:\Users\j138c\src\github.com\jey3dayo\apps-site\src\styles\global.css`
@@ -42,9 +44,10 @@
 - [x] Step 4: Add `ultra-rss-reader` landing and support pages so `/ultra-rss-reader/support` exists immediately.
 - [x] Step 5: Run `pnpm build` and verify Astro emits static output successfully.
 
-### Task 3: Wire Cloudflare and dotenvx operations
+## Task 3: Wire Cloudflare and dotenvx operations
 
 **Files:**
+
 - Create: `C:\Users\j138c\src\github.com\jey3dayo\apps-site\wrangler.jsonc`
 - Create: `C:\Users\j138c\src\github.com\jey3dayo\apps-site\.env`
 - Create: `C:\Users\j138c\src\github.com\jey3dayo\apps-site\.env.keys`
@@ -55,9 +58,10 @@
 - [x] Step 4: Add local `.env.keys` handling and keep it out of version control.
 - [x] Step 5: Run `pnpm exec wrangler deploy --dry-run` or equivalent preview build command to verify config shape without deploying.
 
-### Task 4: Document how to operate and extend the repo
+## Task 4: Document how to operate and extend the repo
 
 **Files:**
+
 - Create: `C:\Users\j138c\src\github.com\jey3dayo\apps-site\README.md`
 
 - [x] Step 1: Document the project goal, route strategy, and why Astro static output is used.
@@ -66,9 +70,10 @@
 - [x] Step 4: Summarize which patterns came from `keep-on` and which heavier pieces were intentionally left out.
 - [x] Step 5: Re-run the core verification commands after the docs are in place.
 
-### Task 5: Final verification
+## Task 5: Final verification
 
 **Files:**
+
 - Modify: `C:\Users\j138c\src\github.com\jey3dayo\apps-site\docs\superpowers\plans\2026-04-13-apps-site-astro-bootstrap.md`
 
 - [x] Step 1: Run `pnpm build` and confirm exit code 0.

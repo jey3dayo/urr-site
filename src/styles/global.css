@@ -14,10 +14,7 @@
   --radius-lg: 28px;
   --radius-md: 18px;
   --radius-sm: 999px;
-  font-family:
-    "Avenir Next",
-    "Segoe UI",
-    sans-serif;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
 }
 
 * {
@@ -258,10 +255,7 @@ p {
   border-radius: 0.8rem;
   background: rgba(8, 56, 75, 0.08);
   color: var(--brand-strong);
-  font-family:
-    "Cascadia Code",
-    "SFMono-Regular",
-    monospace;
+  font-family: "Cascadia Code", "SFMono-Regular", monospace;
   font-size: 0.95rem;
 }
 
