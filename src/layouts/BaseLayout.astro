@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { ultraRssReaderRoutes } from "../data/ultra-rss-reader";
 
 interface Props {
   title: string;
@@ -10,6 +11,7 @@ interface Props {
 
 const { title, description, currentPath = "/", lang = "en" } = Astro.props;
 const canonical = Astro.site ? new URL(currentPath, Astro.site).toString() : undefined;
+const ogLocale = lang === "ja" ? "ja_JP" : "en_US";
 ---
 
 <!doctype html>
@@ -20,6 +22,15 @@ const canonical = Astro.site ? new URL(currentPath, Astro.site).toString() : und
     <title>{title}</title>
     <meta name="description" content={description} />
     {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:site_name" content="apps.jey3dayo.net" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content={ogLocale} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
   </head>
   <body>
     <div class="shell">
@@ -30,14 +41,16 @@ const canonical = Astro.site ? new URL(currentPath, Astro.site).toString() : und
         </a>
         <nav class="topbar-nav" aria-label="Primary">
           <a class="pill" href="/">Home</a>
-          <a class="pill" href="/ultra-rss-reader/">Ultra RSS Reader</a>
-          <a class="pill" href="/ultra-rss-reader/support" data-active={currentPath === "/ultra-rss-reader/support"}>
+          <a class="pill" href={ultraRssReaderRoutes.landing} data-active={currentPath === ultraRssReaderRoutes.landing}>
+            Ultra RSS Reader
+          </a>
+          <a class="pill" href={ultraRssReaderRoutes.support} data-active={currentPath === ultraRssReaderRoutes.support}>
             Support
           </a>
-          <a class="pill" href="/ultra-rss-reader/download" data-active={currentPath === "/ultra-rss-reader/download"}>
+          <a class="pill" href={ultraRssReaderRoutes.download} data-active={currentPath === ultraRssReaderRoutes.download}>
             Download
           </a>
-          <a class="pill" href="/ultra-rss-reader/privacy" data-active={currentPath === "/ultra-rss-reader/privacy"}>
+          <a class="pill" href={ultraRssReaderRoutes.privacy} data-active={currentPath === ultraRssReaderRoutes.privacy}>
             Privacy
           </a>
         </nav>
@@ -46,7 +59,8 @@ const canonical = Astro.site ? new URL(currentPath, Astro.site).toString() : und
         <slot />
       </main>
       <footer class="footer">
-        Public app pages for support, downloads, and privacy information.
+        <p>support、download、privacy などの公開アプリページをまとめるサイトです。</p>
+        <p class="footer-translation">Public app pages for support, downloads, and privacy information.</p>
       </footer>
     </div>
   </body>

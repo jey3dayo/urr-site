@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import AppPageLinks from "../../components/AppPageLinks.astro";
+import { ultraRssReaderPageMapItems, ultraRssReaderRoutes } from "../../data/ultra-rss-reader";
 
 const supportEmail = import.meta.env.PUBLIC_SUPPORT_EMAIL ?? "support@jey3dayo.net";
 
@@ -44,7 +45,7 @@ const supportItems = [
 <BaseLayout
   title="Ultra RSS Reader | apps.jey3dayo.net"
   description="Ultra RSS Reader の公開ページ。support・download・privacy 導線の入口。"
-  currentPath="/ultra-rss-reader/"
+  currentPath={ultraRssReaderRoutes.landing}
   lang="ja"
 >
   <section class="hero">
@@ -59,8 +60,8 @@ const supportItems = [
         Ultra RSS Reader is a desktop-first RSS reader with public support, download, and privacy pages.
       </p>
       <div class="cta-row">
-        <a class="button button-primary" href="/ultra-rss-reader/support">Support</a>
-        <a class="button button-secondary" href="/ultra-rss-reader/download">Download</a>
+        <a class="button button-primary" href={ultraRssReaderRoutes.support}>Support</a>
+        <a class="button button-secondary" href={ultraRssReaderRoutes.download}>Download</a>
       </div>
     </div>
   </section>
@@ -102,25 +103,7 @@ const supportItems = [
   </section>
 
   <section class="grid two">
-    <AppPageLinks
-      items={[
-        {
-          href: "/ultra-rss-reader/support",
-          label: "Support",
-          note: "問い合わせ窓口、FAQ、privacy 要点、ログ案内をまとめた公開ページです。"
-        },
-        {
-          href: "/ultra-rss-reader/download",
-          label: "Download",
-          note: "公開 download 導線の案内ページです。最新版の availability は GitHub Releases 基準で確認します。"
-        },
-        {
-          href: "/ultra-rss-reader/privacy",
-          label: "Privacy",
-          note: "現在の privacy policy の要点をまとめた公開ページです。"
-        }
-      ]}
-    />
+    <AppPageLinks items={ultraRssReaderPageMapItems} />
 
     <div class="card">
       <div class="section-heading">

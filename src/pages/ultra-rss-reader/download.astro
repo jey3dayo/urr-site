@@ -1,9 +1,13 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import AppPageLinks from "../../components/AppPageLinks.astro";
+import {
+  ultraRssReaderPageMapItems,
+  ultraRssReaderReleasesUrl,
+  ultraRssReaderRoutes,
+} from "../../data/ultra-rss-reader";
 
 const supportEmail = import.meta.env.PUBLIC_SUPPORT_EMAIL ?? "support@jey3dayo.net";
-const releasesUrl = "https://github.com/jey3dayo/ultra-rss-reader/releases";
 
 const availabilityItems = [
   {
@@ -60,8 +64,8 @@ const safetyItems = [
         Public download availability may change, so this page points to GitHub Releases as the primary place to check.
       </p>
       <div class="cta-row">
-        <a class="button button-primary" href={releasesUrl} target="_blank" rel="noreferrer">GitHub Releases</a>
-        <a class="button button-secondary" href="/ultra-rss-reader/support">Support</a>
+        <a class="button button-primary" href={ultraRssReaderReleasesUrl} target="_blank" rel="noreferrer">GitHub Releases</a>
+        <a class="button button-secondary" href={ultraRssReaderRoutes.support}>Support</a>
       </div>
     </div>
   </section>
@@ -103,25 +107,7 @@ const safetyItems = [
   </section>
 
   <section class="grid two">
-    <AppPageLinks
-      items={[
-        {
-          href: "/ultra-rss-reader/support",
-          label: "Support",
-          note: "問い合わせ窓口、FAQ、トラブルシュート案内。"
-        },
-        {
-          href: "/ultra-rss-reader/download",
-          label: "Download",
-          note: "このページ。公開 download 導線の案内。"
-        },
-        {
-          href: "/ultra-rss-reader/privacy",
-          label: "Privacy",
-          note: "privacy と feed content policy の要点。"
-        }
-      ]}
-    />
+    <AppPageLinks items={ultraRssReaderPageMapItems} />
 
     <div class="card">
       <div class="section-heading">
@@ -131,7 +117,7 @@ const safetyItems = [
       </div>
       <div class="cta-row">
         <a class="button button-primary" href={`mailto:${supportEmail}`}>{supportEmail}</a>
-        <a class="button button-secondary" href={releasesUrl} target="_blank" rel="noreferrer">Open Releases</a>
+        <a class="button button-secondary" href={ultraRssReaderReleasesUrl} target="_blank" rel="noreferrer">Open Releases</a>
       </div>
     </div>
   </section>

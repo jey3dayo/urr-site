@@ -1,0 +1,77 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AppPageLinks from "../components/AppPageLinks.astro";
+import {
+  ultraRssReaderNamespaceItem,
+  ultraRssReaderPageMapItems,
+  ultraRssReaderRoutes,
+} from "../data/ultra-rss-reader";
+---
+
+<BaseLayout
+  title="Page Not Found | apps.jey3dayo.net"
+  description="お探しのページは見つかりませんでした。公開アプリページ一覧から目的のページへ移動できます。"
+  currentPath="/404"
+  lang="ja"
+>
+  <section class="hero">
+    <div class="eyebrow">404</div>
+    <div class="hero-copy">
+      <h1>ページが見つかりませんでした</h1>
+      <p>
+        URL が変わったか、入力に誤りがある可能性があります。公開中の app page 一覧から、
+        目的のページへ移動してください。
+      </p>
+      <p class="translation">
+        The page could not be found. Please use the public app links below to continue.
+      </p>
+      <div class="cta-row">
+        <a class="button button-primary" href="/">Home</a>
+        <a class="button button-secondary" href={ultraRssReaderRoutes.support}>Ultra RSS Reader Support</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid two">
+    <div class="card">
+      <div class="section-heading">
+        <h2>まず確認してほしいこと</h2>
+        <p>リンク切れに見える場合でも、公開ページ自体は別 route に存在していることがあります。</p>
+        <p class="translation">A broken link may simply point to the wrong route while the public page still exists.</p>
+      </div>
+      <ul class="card-list">
+        <li>
+          <span class="mini-label">Home</span>
+          <p>公開アプリページの一覧に戻って、現在の route を確認してください。</p>
+          <p class="translation">Return to the home page to see the current public routes.</p>
+        </li>
+        <li>
+          <span class="mini-label">Ultra RSS Reader</span>
+          <p>support / download / privacy は Ultra RSS Reader の namespace 配下にあります。</p>
+          <p class="translation">Support, download, and privacy pages live under the Ultra RSS Reader namespace.</p>
+        </li>
+        <li>
+          <span class="mini-label">Need help</span>
+          <p>見つからないページを探していた場合は、support page から問い合わせできます。</p>
+          <p class="translation">If you were trying to reach a missing page, the support page is the safest place to start.</p>
+        </li>
+      </ul>
+    </div>
+
+    <AppPageLinks
+      title="利用できる公開ページ"
+      description="現在公開している namespace と主要ページです。"
+      items={[
+        ultraRssReaderNamespaceItem,
+        ...ultraRssReaderPageMapItems,
+      ]}
+    />
+  </section>
+</BaseLayout>
+
+<style>
+  .translation {
+    margin-top: 0.35rem;
+    font-size: 0.96rem;
+  }
+</style>

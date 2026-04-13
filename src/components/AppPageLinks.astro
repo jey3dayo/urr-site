@@ -7,15 +7,21 @@ interface LinkItem {
 
 interface Props {
   items: LinkItem[];
+  title?: string;
+  description?: string;
 }
 
-const { items } = Astro.props;
+const {
+  items,
+  title = "ページ一覧",
+  description = "各 app は path ごとに分かれているため、support・download・privacy を同じ host 上で育てていけます。",
+} = Astro.props;
 ---
 
 <div class="card">
   <div class="section-heading">
-    <h2>Page map</h2>
-    <p>Each app lives under its own path, so support, downloads, and privacy pages can grow without changing the host model.</p>
+    <h2>{title}</h2>
+    <p>{description}</p>
   </div>
   <ul class="card-list">
     {items.map((item) => (
@@ -23,7 +29,6 @@ const { items } = Astro.props;
         <span class="mini-label">{item.label}</span>
         {item.href ? <a class="route-chip" href={item.href}>{item.href}</a> : <span class="route-chip">{item.note}</span>}
         {item.href && <p>{item.note}</p>}
-        {!item.href && <p>{item.note}</p>}
       </li>
     ))}
   </ul>

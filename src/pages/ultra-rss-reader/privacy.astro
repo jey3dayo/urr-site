@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import AppPageLinks from "../../components/AppPageLinks.astro";
+import { ultraRssReaderPageMapItems, ultraRssReaderRoutes } from "../../data/ultra-rss-reader";
 
 const supportEmail = import.meta.env.PUBLIC_SUPPORT_EMAIL ?? "support@jey3dayo.net";
 
@@ -95,7 +96,7 @@ const futureItems = [
         This page summarizes the current privacy and feed content policy based on the public source of Ultra RSS Reader.
       </p>
       <div class="cta-row">
-        <a class="button button-primary" href="/ultra-rss-reader/support">Support</a>
+        <a class="button button-primary" href={ultraRssReaderRoutes.support}>Support</a>
         <a class="button button-secondary" href={`mailto:${supportEmail}`}>{supportEmail}</a>
       </div>
     </div>
@@ -174,25 +175,7 @@ const futureItems = [
   </section>
 
   <section class="grid two">
-    <AppPageLinks
-      items={[
-        {
-          href: "/ultra-rss-reader/support",
-          label: "Support",
-          note: "問い合わせ窓口、FAQ、トラブルシュート案内。"
-        },
-        {
-          href: "/ultra-rss-reader/download",
-          label: "Download",
-          note: "公開 download 導線の案内ページです。最新版の availability は GitHub Releases 基準で確認します。"
-        },
-        {
-          href: "/ultra-rss-reader/privacy",
-          label: "Privacy",
-          note: "このページ。現在の privacy policy の要点をまとめています。"
-        }
-      ]}
-    />
+    <AppPageLinks items={ultraRssReaderPageMapItems} />
 
     <div class="card">
       <div class="section-heading">
@@ -202,7 +185,7 @@ const futureItems = [
       </div>
       <div class="cta-row">
         <a class="button button-primary" href={`mailto:${supportEmail}`}>{supportEmail}</a>
-        <a class="button button-secondary" href="/ultra-rss-reader/support">Support page</a>
+        <a class="button button-secondary" href={ultraRssReaderRoutes.support}>Support page</a>
       </div>
     </div>
   </section>

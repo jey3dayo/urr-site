@@ -1,6 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import AppPageLinks from "../components/AppPageLinks.astro";
+import {
+  ultraRssReaderNamespaceItem,
+  ultraRssReaderPageMapItems,
+  ultraRssReaderPublicPaths,
+  ultraRssReaderRoutes,
+} from "../data/ultra-rss-reader";
 ---
 
 <BaseLayout
@@ -21,15 +27,14 @@ import AppPageLinks from "../components/AppPageLinks.astro";
         apps.jey3dayo.net groups public support, download, and privacy pages for each app under path-based routes.
       </p>
       <div class="cta-row">
-        <a class="button button-primary" href="/ultra-rss-reader/">Ultra RSS Reader</a>
-        <a class="button button-secondary" href="/ultra-rss-reader/support">Support</a>
+        <a class="button button-primary" href={ultraRssReaderRoutes.landing}>Ultra RSS Reader</a>
+        <a class="button button-secondary" href={ultraRssReaderRoutes.support}>Support</a>
       </div>
     </div>
     <div class="route-preview" aria-label="Route preview">
-      <span class="route-chip">/ultra-rss-reader/</span>
-      <span class="route-chip">/ultra-rss-reader/support</span>
-      <span class="route-chip">/ultra-rss-reader/download</span>
-      <span class="route-chip">/ultra-rss-reader/privacy</span>
+      {ultraRssReaderPublicPaths.map((path) => (
+        <span class="route-chip">{path}</span>
+      ))}
     </div>
   </section>
 
@@ -57,27 +62,11 @@ import AppPageLinks from "../components/AppPageLinks.astro";
     </div>
 
     <AppPageLinks
+      title="公開ページ一覧"
+      description="アプリごとに path を分けて、公開導線を小さく育てていく前提です。"
       items={[
-        {
-          href: "/ultra-rss-reader/",
-          label: "Ultra RSS Reader",
-          note: "First app namespace with a small landing page and live support URL."
-        },
-        {
-          href: "/ultra-rss-reader/support",
-          label: "Support",
-          note: "Store-facing support page with email-first guidance."
-        },
-        {
-          href: "/ultra-rss-reader/download",
-          label: "Download",
-          note: "Live download guidance page that points users to the current public release source."
-        },
-        {
-          href: "/ultra-rss-reader/privacy",
-          label: "Privacy",
-          note: "Live privacy summary page for Ultra RSS Reader."
-        }
+        ultraRssReaderNamespaceItem,
+        ...ultraRssReaderPageMapItems,
       ]}
     />
   </section>
