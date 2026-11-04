@@ -20,6 +20,10 @@ MD_EXCLUDE_WORKTREES = "#**/.worktrees/**"
 node = "24.14.1"
 pnpm = "10.33.0"
 "pipx:yamllint" = "latest"
+gh-actions-lock = { version = "0.4.0", bin = "gh-actions-lock" }
+
+[tool_alias]
+gh-actions-lock = "github:github/gh-actions-lock"
 
 # ========================================
 # コマンド（実処理タスク）
@@ -47,6 +51,17 @@ run = "pnpm markdownlint-cli2 '${MD_GLOB}' ${MD_EXCLUDE_NODE_MODULES} ${MD_EXCLU
 [tasks."lint:yaml"]
 description = "yamllint による YAML チェック"
 run = "yamllint -c .yamllint .github/"
+
+[tasks."actions-lock:generate"]
+description = "actions.lock を再生成し upstream で検証（gh login が必要）"
+run = [
+  "gh-actions-lock --migrate-local-actions --no-interactive",
+  "gh-actions-lock --verify"
+]
+
+[tasks."actions-lock:verify"]
+description = "オフライン検査: すべての uses: に lockfile entry があり lockfile が読めること"
+run = "gh-actions-lock --verify-local"
 
 [tasks."cf:whoami"]
 description = "dotenvx経由でCloudflare認証状態を確認"

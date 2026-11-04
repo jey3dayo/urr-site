@@ -19,12 +19,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
 
       - name: Apply PR Insights Labels
-        uses: jey3dayo/pr-insights-labeler@v1
+        uses: jey3dayo/pr-insights-labeler@v1.15.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           file_size_limit: "100KB"
