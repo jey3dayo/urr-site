@@ -60,8 +60,8 @@ run = [
 ]
 
 [tasks."actions-lock:verify"]
-description = "オフライン検査: すべての uses: に lockfile entry があり lockfile が読めること"
-run = "gh-actions-lock --verify-local"
+description = "凍結検査: lockfile が完全で runner が pin を拒否しないこと（GH_TOKEN か gh login が必要）"
+run = "gh-actions-lock --verify"
 
 [tasks."cf:whoami"]
 description = "dotenvx経由でCloudflare認証状態を確認"
