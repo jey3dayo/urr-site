@@ -30,7 +30,9 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: mise install gh-actions-lock
 
-      - name: Check actions.lock covers workflows
+      - name: Verify actions.lock
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: mise run actions-lock:verify
 
       - name: Install tools
